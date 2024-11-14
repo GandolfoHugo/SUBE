@@ -1,16 +1,17 @@
-# Análisis de Datos de SUBE
+# UN ANALISIS DE DATOS DE MOVILIDAD EN TRANSPORTE PÚBLICO EN AMBA. (2020 - 2024)
+## TENDENCIAS CRECIENTES Y GÉNERO 
 
 Este es un breve análisis de los datos públicos publicados por el Ministerio de Transporte de la Nación. En este repositorio podrán encontrar tanto los datos en formato .csv como su respectivo análisis por año.
 
 ## Metodología
 
-La metodología empleada en el análisis de movilidad con datos de SUBE se basa en la manipulación y visualización de datos a partir de un conjunto de datos en formato CSV. A continuación, se describen los pasos realizados:
+La metodología empleada en el análisis de movilidad con datos de SUBE se basa en la manipulación y visualización de datos a partir de un conjunto de datos en formato CSV descargados desde los Datasets de Datos Abiertos proporcionados por el Estado Nacional Argentino. Se utilizaron diferentes librerias en R utilizando Quarto obteniendo informes en HTTML para su reproduccion y mejoramiento a quien desee. A continuación, se describen los pasos realizados:
 
 ### Carga de Datos
 
 1. **Carga de Librerías**: Se cargan las librerías necesarias para el análisis, incluyendo `tidyverse`, `ggplot2`, `lubridate`, entre otras, que facilitan la manipulación y visualización de los datos.
 
-2. **Carga de la Base de Datos**: Se define una función `base_sube` que permite cargar los datos desde una URL específica. En este caso, se utiliza un archivo CSV que contiene información sobre los usuarios de SUBE en 2024.
+2. **Carga de la Base de Datos**: Se define una función `base_sube` que permite cargar los datos desde una URL específica. En este caso, se utiliza un archivo CSV que contiene información sobre los usuarios de SUBE desde el 2020 hasta el 2024.
 
 ### Filtrado y Agrupación
 
@@ -49,3 +50,14 @@ La metodología empleada en el análisis de movilidad con datos de SUBE se basa 
 ### Conclusiones
 
 Este análisis proporciona una visión detallada de la movilidad en el AMBA durante los años 2020 hasta el mes de Octubre del año 2024, permitiendo identificar patrones y tendencias en el uso del transporte público a través de la tarjeta SUBE.
+Asimismo encontramos una tendencia de feminización en el transporte publico, secuencia repetida en todos los años analizados. Este analisis no posee la capacidad ni aspira a arriesgar soluciones posibles o hipotesis que expliquen adecuadamente(es decir, con la introduccion de varibles de otros tipos para explicar correlaciones correctas). Aún así:
+
+##. 
+
+
+
+
+
+
+
+
