@@ -50,11 +50,12 @@ La metodología empleada en el análisis de movilidad con datos de SUBE se basa 
 ### Conclusiones
 
 Este análisis proporciona una visión detallada de la movilidad en el AMBA durante los años 2020 hasta el mes de Octubre del año 2024, permitiendo identificar patrones y tendencias en el uso del transporte público a través de la tarjeta SUBE.
-Asimismo encontramos una tendencia de feminización en el transporte publico, secuencia repetida en todos los años analizados. Este analisis no posee la capacidad ni aspira a arriesgar soluciones posibles o hipotesis que expliquen adecuadamente(es decir, con la introduccion de varibles de otros tipos para explicar correlaciones correctas). Aún así:
+Asimismo encontramos una tendencia de feminización en el transporte publico, secuencia repetida en todos los años analizados. Este analisis no posee la capacidad ni aspira a arriesgar soluciones posibles o hipotesis que expliquen adecuadamente(es decir, con la introduccion de variables de otros tipos para explicar correlaciones correctas). Aún así podemos moldear algunas posibles respuestas en base a totros datos publicos:
 
-##. 
-
-
+## DATOS DE INFORMES
+Según el informe "Principales Indicadores de la Seguridad Via con Perspectiva de Género en Argentina" Marzo 2023 del Ministerio de Transporte
+En Argentina, la conducción continúa siendo una actividad principalmente masculina. De las licencias de conducir emitidas en 2022 sólo el 31% corresponde a Mujeres frente al 69% de Varones.
+En cuanto a las clases de licencias vigentes a la fecha, cabe mencionar que casi 3 de cada 10 licencias clase A 1 (motos) corresponde a una mujer, dato similar a la participación de las mujeres en las clases B de autos (35%). 
 
 
 
