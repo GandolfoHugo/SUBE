@@ -57,6 +57,8 @@ Según el informe "Principales Indicadores de la Seguridad Via con Perspectiva d
 En Argentina, la conducción continúa siendo una actividad principalmente masculina. De las licencias de conducir emitidas en 2022 sólo el 31% corresponde a Mujeres frente al 69% de Varones.
 En cuanto a las clases de licencias vigentes a la fecha, cabe mencionar que casi 3 de cada 10 licencias clase A 1 (motos) corresponde a una mujer, dato similar a la participación de las mujeres en las clases B de autos (35%). 
 
+Asimismo pudimos encontrar un dataset del gobierno de la ciudad de Buenos Aires en donde se encuentran las licencias emitidas por año. Con el podemos hacer algunos graficos para entender mejor la dinamica de de generos en la expedicion de licencia de conducir.
+
 
 
 
