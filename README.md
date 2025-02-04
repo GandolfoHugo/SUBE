@@ -60,7 +60,11 @@ En cuanto a las clases de licencias vigentes a la fecha, cabe mencionar que casi
 Asimismo pudimos encontrar un dataset del gobierno de la ciudad de Buenos Aires en donde se encuentran las licencias emitidas por año. Con el podemos hacer algunos graficos para entender mejor la dinamica de de generos en la expedicion de licencia de conducir.
 
 
+#PROVINCIA DE BUENOS AIRES#
+Dentro del rango etario 18-50 años se expidió la mayor cantidad de licencias nacionales de conducir. En ese aspecto, de un total de 668.641, hubo 222.020 que correspondieron a personas de entre 18 y 30 años; 223.242 se destinaron a conductores y conductoras de entre 31 y 40 años; y 223.379 al rango etario 41-50 años.
 
+Como contrapartida, la menor cantidad de licencias emitidas fue para menores de 18 años de edad (9.796) y mayores de 80 (21.573). En el medio se ubican los rangos 51-60 (160.547 licencias), 61-70 (96.224) y 71-80 (118.023).
 
+En tanto, en cuanto a géneros, se emitieron 755.023 (70,2%) licencias para hombres y 319.767 (29,8%) para mujeres.
 
 
