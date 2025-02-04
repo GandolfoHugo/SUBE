@@ -1,0 +1,321 @@
+---
+title: "Análisis de Movilidad SUBE 2024"
+author: "Hugo Gandolfo"
+date: "`r Sys.Date()`"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    code-fold: false # Para ver el código en algunos chunks particulares
+    self-contained: true
+    toc_float: true
+    toc_collapsed: true
+    toc_depth: 3
+    page-layout: full
+    theme: united
+editor: visual
+execute:
+  echo: true # Mostrar el código en HTML para algunos chunks específicos
+  warning: false
+  message: false
+---
+
+![](https://www.defensorba.org.ar/uploads/6263e6d758034_sube%20(1).jpg)
+
+# Cargamos la base SUBE y cargamos librerias
+
+```{r}
+#| echo: true
+#| warning: false
+# Librerías necesarias
+library(readr)
+library(tidyverse)
+library(kableExtra)
+library(ggrepel)
+library(webshot)
+library(webshot2)
+library(magick)
+library(scales)
+library(extrafont)
+library(extrafontdb)
+library(showtext)
+library(showtextdb)
+library(corrplot)
+library(plotly)
+library(htmltools)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(dplyr)
+library(magrittr)
+
+# Cargar base de datos con una funcion
+base_sube <- function(file_path) {
+  read.csv(file_path, sep = ',')
+}
+# Cargamos la base de datos desde la URL
+
+# Cargar base de datos 2020 como ejemplo
+data_sube <- base_sube("https://raw.githubusercontent.com/GandolfoHugo/SUBE/refs/heads/main/dat-ab-usuarios-2024.csv")
+head(data_sube)
+
+
+```
+
+### Filtramos por AMBA y Totales
+
+```{r}
+#| echo: true
+#| # Filtrar por AMBA y seleccionar solo registros con totales
+base_amba <- data_sube %>% filter(AMBA == 'SI')
+filtro_totales <- base_amba %>% filter(TIPO_TRANSPORTE == 'TOTAL')
+
+```
+
+### 3. Agrupar y Limpiar la Columna de Género
+
+```{r}
+#| echo: true
+#| warning: false
+filtros_genero <- filtro_totales %>% 
+  group_by(DIA_TRANSPORTE, GENERO) %>% 
+  summarise(Cantidad_total = sum(CANT_TRJ))
+filtros_genero$GENERO[filtros_genero$GENERO == ''] <- 'Sin_registro'
+```
+
+3.Creamos una base agrupada por dia con la cantidad total de viajes.
+
+```{r}
+#| echo: true
+Total_agrupado <- filtro_totales %>% 
+  group_by(DIA_TRANSPORTE) %>% 
+  summarise(Cantidad = sum(CANT_TRJ))
+```
+
+### 4. Convertir Formato de Fecha
+
+```{r}
+#| echo: true
+filtros_genero <- filtros_genero %>% mutate(DIA_TRANSPORTE = ymd(DIA_TRANSPORTE))
+
+```
+
+### 5. Visualización de la Serie Temporal
+
+```{r}
+ggplot(filtros_genero, aes(x = DIA_TRANSPORTE, y = Cantidad_total, color = GENERO)) + 
+  geom_line() +
+  labs(title = 'Movilidad diaria SUBE por Sexo en 2024', x = 'Fecha', y = 'Cantidad de viajes SUBE') +
+  theme_minimal()
+```
+
+### 6. Agregar Eventos Relevantes y Personalizar la Gráfica
+
+```{r}
+ggplot(filtros_genero, aes(x = DIA_TRANSPORTE, y = Cantidad_total, color = GENERO)) + 
+  geom_line() +
+  geom_vline(aes(xintercept = as.Date("2024-03-01"), color = "Inicio Lectivo"), linetype = "dashed") +
+  labs(title = 'Movilidad diaria SUBE por Sexo en 2024', x = 'Fecha', y = 'Cantidad de viajes SUBE', caption = 'Datos: SUBE') +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+### 7. Personalizar Colores Manualmente
+
+```{r}
+plot_sube <- ggplot(filtros_genero, aes(x = DIA_TRANSPORTE, y = Cantidad_total, color = GENERO)) + 
+  geom_line() +
+  scale_color_manual(values = c("ASPO" = "black", "DISPO" = "green", "F" = "violet", "M" = "blue", "Sin_registro" = "gray")) +
+  labs(title = 'Movilidad diaria SUBE por Sexo en 2024', x = 'Fecha', y = 'Cantidad de viajes SUBE') +
+  theme_minimal()
+
+ggplotly(plot_sube, height = 500, width = 700)
+
+```
+
+## Graficando en barras
+
+#### En primer lugar vamos a filtrar los valores vacíos:
+
+```{r}
+#| echo: true
+#| warning: false
+totales_sin_na <- filtro_totales %>% 
+  filter(GENERO == 'M' | GENERO == 'F') %>% 
+  filter(MOTIVO_ATSF != "")
+descuentos_marzo <- totales_sin_na %>% 
+  filter(DIA_TRANSPORTE >= '2024-03-01' & DIA_TRANSPORTE <= '2024-03-31')
+```
+
+#### Agrupamos por genero y tipo de descuento
+
+```{r}
+  descuentos_marzo_agrupado <- descuentos_marzo %>% 
+  group_by(MOTIVO_ATSF) %>% 
+  summarise(Total = sum(CANT_TRJ))
+```
+
+#### Grafiquemos
+
+```{r}
+ggplot(data = descuentos_marzo_agrupado) +
+  aes(x = reorder(MOTIVO_ATSF, -Total), y = Total) +
+  geom_col()+
+  coord_flip()
+```
+
+#### Volvamos a filtrar los viajes de marzo pero esta vez agrupando también por SEXO.
+
+```{r}
+descuentos_genero <- descuentos_marzo %>% 
+  group_by(MOTIVO_ATSF, GENERO) %>% 
+  summarise(Total = sum(CANT_TRJ))
+```
+
+#### Ahora que tenemos una categoría, podemos diferenciar con ‘fill’
+
+```{r}
+ggplot(data = descuentos_genero) +
+  aes(x = reorder(MOTIVO_ATSF, -Total), y = Total, fill = GENERO) +
+  geom_col()+
+  coord_flip()
+```
+
+#### Podemos separar las barras por categoría y agregar un borde a las barras:
+
+```{r}
+ggplot(data = descuentos_genero) +
+  aes(x = reorder(MOTIVO_ATSF, -Total), y = Total, fill = GENERO) +
+  geom_col( 
+           position= position_dodge(), 
+           color = 'black')+
+  coord_flip()
+```
+
+#### También podemos transformar los valores absolutos en porcentaje:
+
+```{r}
+descuentos <- totales_sin_na %>% 
+  group_by(MOTIVO_ATSF) %>% 
+  summarise(Total = sum(CANT_TRJ),
+            Varones_N = sum(CANT_TRJ[GENERO == 'M']),
+            Mujeres_N = sum(CANT_TRJ[GENERO == 'F']),
+            Varones = Varones_N/Total * 100,
+            Mujeres = Mujeres_N/Total * 100) %>% 
+  select(MOTIVO_ATSF, Mujeres, Varones) %>% 
+  pivot_longer(.,cols =  2:3, names_to = 'SEXO', values_to = 'Porcentaje' )
+```
+
+#### Graficamos:
+
+```{r}
+descuento_sube <-  ggplot(data = descuentos) +
+  aes(x = MOTIVO_ATSF, y = Porcentaje, fill = SEXO) +
+  geom_col( color = 'black',
+           position = position_dodge())+
+  labs(title = 'Cantidad de viajes realizados con tarjeta SUBE con descuento en 2024',
+       x = 'Tipo de descuento', fill = 'SEXO',
+       caption = 'Fuente: Elaboracion propia en base a datos abiertos SUBE 2024')+
+  coord_flip()
+ggplotly(descuento_sube, width = 700, height = 500)
+```
+
+#### ¿Probamos agrupando el promedio de viajes por mes?
+
+```{r}
+x_por_mes <- Total_agrupado %>% 
+  mutate(FECHA = ymd(DIA_TRANSPORTE)) %>%
+  mutate(Mes = month(FECHA)) %>%
+  mutate(Mes = month.name[Mes]) %>% 
+  select(-(DIA_TRANSPORTE))
+
+head(x_por_mes)
+```
+
+#### Factoreamos y miramos por mes que sucede:
+
+```{r}
+x_por_mes_2 <- x_por_mes %>% 
+  group_by(Mes) %>% 
+  mutate( Mes = factor(Mes, levels = month.name) ) %>%
+  summarise(Promedio_mensual = mean(Cantidad)) %>% 
+  mutate(Promedio_mensual = as.integer(Promedio_mensual)) %>% 
+  arrange(Mes)
+```
+
+#### Y nuevamente lo graficamos:
+
+```{r}
+ggplot(data = x_por_mes_2) +  
+  aes(y = Promedio_mensual, x = Mes, fill = Promedio_mensual) +  
+  geom_col(color = "black") +
+  scale_fill_gradient(low = 'green', high = "red", name = 'Promedio mensual') +
+  labs(
+    title = 'Cantidad de viajes promedio por mes con tarjeta SUBE',
+    subtitle = 'Año 2024',
+    y = 'Promedio mensual',
+    caption = 'Fuente: Base SUBE 2024'
+  ) +
+  theme(axis.text.x = element_text(angle = 90))
+
+```
+
+#### Podemos también agregar el promedio por sexo: Sumamos el total por sexo
+
+```{r}
+Total_agrupado <- filtro_totales %>% 
+  group_by(DIA_TRANSPORTE) %>% 
+  summarise(Cantidad = sum(CANT_TRJ),
+            FEM = sum(CANT_TRJ[GENERO == 'F']),
+            MASC = sum(CANT_TRJ[GENERO == 'M']))
+```
+
+#### Agrupamos por mes igual que anteriormente agregando el promedio mensual por sexo:
+
+```{r}
+x_por_mes <- Total_agrupado %>% 
+  mutate(FECHA = ymd(DIA_TRANSPORTE)) %>% 
+  group_by(Mes = month(FECHA)) %>% 
+  mutate(Mes = month.name[Mes]) %>% 
+  select(-(DIA_TRANSPORTE))%>% 
+  summarise(Cantidad = mean(Cantidad),
+            FEM  = mean(FEM),
+            MASC = mean(MASC)) %>% 
+  mutate( Mes = factor(Mes, levels = month.name) ) %>% 
+  arrange(Mes)
+```
+
+#### agregamos una columna que numere los meses ya que la necesitamos para las líneas.
+
+```{r}
+x_por_mes <- x_por_mes %>% 
+  mutate(mes_numero = c(1:10))
+```
+
+#### Quitamos los decimales:
+
+```{r}
+x_por_mes <- x_por_mes %>%
+  mutate(Cantidad = as.integer(Cantidad),
+         FEM = as.integer(FEM),
+         MASC = as.integer(MASC))
+```
+
+#### Graficamos de forma interativa:
+
+```{r}
+grafico <- ggplot(data = x_por_mes, aes(x = Mes)) +  
+          geom_col(aes(y = Cantidad, x = Mes, fill = Cantidad),color = "black")+
+          geom_line(data = x_por_mes,aes(x=mes_numero, y = FEM, color = 'F'), linewidth =    1.5)+
+          geom_line(data = x_por_mes,aes(x=mes_numero, y = MASC, color = 'M'), linewidth = 1.5)+
+          scale_fill_gradient(low = 'white',high = "blue")+
+          labs(title='Cantidad de viajes por mes con tarjeta SUBE',
+               subtitle = 'Año 2023',
+               caption = 'Fuente: Base SUBE 2024',
+               color = 'Sexo')+
+          theme_minimal()+
+          theme(axis.text.x = element_text(angle = 45))+
+          scale_color_manual(values=c("#CC6666", "#9999CC"))
+
+ggplotly(grafico, width = 700, height = 500)
+```
