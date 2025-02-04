@@ -66,5 +66,53 @@ Dentro del rango etario 18-50 años se expidió la mayor cantidad de licencias n
 Como contrapartida, la menor cantidad de licencias emitidas fue para menores de 18 años de edad (9.796) y mayores de 80 (21.573). En el medio se ubican los rangos 51-60 (160.547 licencias), 61-70 (96.224) y 71-80 (118.023).
 
 En tanto, en cuanto a géneros, se emitieron 755.023 (70,2%) licencias para hombres y 319.767 (29,8%) para mujeres.
+#CIUDAD DE BUENOS AIRES
+Según los datos proporcionados por la Dirección General de Estadística y Censos del Gobierno de la Ciudad de Buenos Aires, la emisión de licencias de conducir en la Ciudad de Buenos Aires entre 2006 y 2023 refleja una marcada predominancia de los hombres sobre las mujeres en la obtención de licencias, tanto nuevas como renovadas. A continuación, se presentan los hallazgos más relevantes:
 
+1. Distribución por Género
+Predominio Masculino: Del total de licencias emitidas entre 2006 y 2023 (6.080.568), el 69.5% correspondió a hombres (4.309.751) y el 30.5% a mujeres (1.770.817). Esta brecha se mantiene tanto en licencias nuevas como renovadas.
+
+Licencias Nuevas: De 1.020.004 licencias nuevas, el 65.9% fueron otorgadas a hombres (672.785) y el 34.1% a mujeres (347.219).
+
+Licencias Renovadas: De 5.060.564 renovaciones, el 71.9% correspondió a hombres (3.636.966) y el 28.1% a mujeres (1.423.598).
+
+2. Tendencias Temporales
+Evolución Anual: La emisión de licencias ha experimentado fluctuaciones a lo largo de los años. Por ejemplo:
+
+En 2006, se emitieron 280.062 licencias, con un 23.5% de licencias nuevas (70.720) y un 76.5% de renovaciones (209.342).
+
+En 2020, debido a la pandemia de COVID-19, la emisión de licencias se redujo drásticamente a 101.424, con solo 13.187 licencias nuevas.
+
+En 2023, se observa una recuperación, con 352.491 licencias emitidas hasta octubre, de las cuales 35.845 fueron nuevas.
+
+3. Diferencias por Género en Licencias Nuevas y Renovadas
+Licencias Nuevas: La proporción de mujeres que obtienen licencias nuevas ha aumentado ligeramente con el tiempo. Por ejemplo:
+
+En 2006, las mujeres representaron el 33.2% de las licencias nuevas (23.471 de 70.720).
+
+En 2023, esta proporción aumentó al 41.5% (14.866 de 35.845).
+
+Licencias Renovadas: La brecha de género es más pronunciada en las renovaciones, donde las mujeres representan solo el 28.1% del total.
+
+4. Meses con Mayor Actividad
+Los meses de enero, marzo y septiembre suelen ser los de mayor emisión de licencias, coincidiendo con el inicio de ciclos lectivos y la preparación para la temporada de verano.
+
+Por el contrario, los meses de febrero y abril registran una menor actividad, posiblemente debido a las vacaciones y festividades.
+
+5. Impacto de la Pandemia (2020-2021)
+La pandemia de COVID-19 tuvo un impacto significativo en la emisión de licencias:
+
+En 2020, solo se emitieron 101.424 licencias, con una caída del 77.8% en comparación con 2019 (457.823).
+
+En 2021, la recuperación fue lenta, con 76.210 licencias emitidas, de las cuales el 77.3% fueron renovaciones.
+
+6. Comparación con Otras Jurisdicciones
+Al igual que en la Provincia de Buenos Aires, donde el 70.2% de las licencias corresponden a hombres y el 29.8% a mujeres, la Ciudad de Buenos Aires refleja una tendencia similar, con una participación femenina ligeramente superior (30.5%).
+
+7. Conclusiones
+La conducción en la Ciudad de Buenos Aires continúa siendo una actividad predominantemente masculina, aunque la participación de mujeres ha aumentado en los últimos años, especialmente en la obtención de licencias nuevas.
+
+La pandemia de COVID-19 tuvo un impacto significativo en la emisión de licencias, con una lenta recuperación en 2021 y 2022.
+
+Estos datos refuerzan la necesidad de políticas públicas que fomenten la igualdad de género en el acceso a la movilidad y la seguridad vial.
 
